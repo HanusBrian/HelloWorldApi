@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HelloWorldApi.Tests.TestModels
 {
-    class TestHelloWorldModel
+    class MessageContextTest
     {
     }
 }
