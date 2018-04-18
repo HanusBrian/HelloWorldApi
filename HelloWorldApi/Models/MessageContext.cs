@@ -31,11 +31,18 @@ namespace HelloWorldApi.Models
             Message message = GetMessageById(input.id);
             if (message == null)
             {
-                message.id = nextId++;
+                message = new Message
+                {
+                    id = nextId++,
+                    message = input.message
+                };
+
                 messages.Add(message);
                 return message;
             }
-            return message = input;
+
+            message.message = input.message;
+            return input;
         }
 
         public Message Delete(int id)
@@ -49,9 +56,9 @@ namespace HelloWorldApi.Models
             return null;
         }
 
-        private Message GetMessageById(int? id)
+        private Message GetMessageById(int id)
         {
-            if(id != null)
+            if(id != 0)
             {
                 return messages.FirstOrDefault(x => x.id == id);
             }

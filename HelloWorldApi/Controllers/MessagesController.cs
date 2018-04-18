@@ -42,12 +42,13 @@ namespace HelloWorldApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]string value)
         {
-            Message message = new Message() { message = value };
-            if (repo.Save(message) == null)
+            Message messageIn = new Message() { message = value.ToString() };
+            Message messageOut = repo.Save(messageIn);
+            if (messageOut == null)
             {
                 return BadRequest();
             }
-            return Ok(repo.Save(message));
+            return Ok(repo.Save(messageOut));
         }
 
         // PUT v1/api/messages/5

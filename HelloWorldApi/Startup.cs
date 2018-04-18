@@ -26,7 +26,7 @@ namespace HelloWorldApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IDataRepository<Message>, MessageRepository>();
-            services.AddTransient<IDataContext<Message>, MessageContext>();
+            services.AddSingleton<IDataContext<Message>, MessageContext>();
             services.AddMvc();
         }
 
