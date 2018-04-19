@@ -130,13 +130,20 @@ namespace HelloWorldClient
                 {
                     if (response.IsSuccessStatusCode)
                     {
-                        string responseData = await response.Content.ReadAsStringAsync();
-
-                        // Response is json
-                        List<Message> jsonObjects = JsonConvert.DeserializeObject<List<Message>>(responseData);
-                        foreach (var m in jsonObjects)
+                        if(response.StatusCode == System.Net.HttpStatusCode.OK)
                         {
-                            result.Add(m.message);
+                            string responseData = await response.Content.ReadAsStringAsync();
+
+                            // Response is json
+                            List<Message> jsonObjects = JsonConvert.DeserializeObject<List<Message>>(responseData);
+                            foreach (var m in jsonObjects)
+                            {
+                                result.Add(m.message);
+                            }
+                        }
+                        else
+                        {
+                            result.Add(response.StatusCode.ToString());
                         }
                     }
                     else
